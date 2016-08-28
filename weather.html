@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Tyler Peterson's Weather App</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#f05d5e">
+  
+  <!-- favicon -->
+  <link rel="shortcut icon" href="images/logos/Space-Shooter.png">  
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="portfolio.css">
+  <!-- social icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- dev icons -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <!-- weather.js -->
+  <script src="weather.js"></script>
+  <script src="weather-data.js"></script>
+
+</head>
+
+<!-- Nav Menu   -->
+    <div class="fixed-nav-bar">    
+      <span id="hamburger" class="fa fa-bars fa-3x col-md-1 col-md-offset-11 col-xs-3 col-xs-offset-9" onclick="openNav()"></span>  
+      <nav id="nav" class="overlay">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a href="index.html" onclick="closeNav()">Home</a>
+          <a href="index.html#contact" onclick="closeNav()">Contact</a>
+          <a href="index.html#portfolio" onclick="closeNav()">Portfolio</a>
+          <a href="projects/resume/resume.html" onclick="closeNav()">Resume</a>
+        </div>
+      </nav>
+    </div>
+<!-- End of Nav -->
+
+<body class="container-fluid"> 
+
+	<div id="forecast" onclick="gettingJSON()">TEST</div>
+
+
+</body><!--  end body  -->
+
+</html>
