@@ -8,9 +8,14 @@
   <meta name="theme-color" content="#f05d5e">
   
   <!-- favicon -->
-  <link rel="shortcut icon" href="images/logos/Space-Shooter.png">  
+  <!-- <link rel="shortcut icon" href="images/logos/Space-Shooter.png"> 
+  -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <!-- Google fonts -->  
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!-- custom css -->
-  <link rel="stylesheet" type="text/css" href="portfolio.css">
+  <link rel="stylesheet" href="weather-styles.css">
   <!-- social icons -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <!-- dev icons -->
@@ -20,8 +25,7 @@
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <!-- weather.js -->
-  <script src="weather.js"></script>
-  <script src="weather-data.js"></script>
+  <script src="weather-data.js"></script>  
 
 </head>
 
@@ -41,8 +45,59 @@
 <!-- End of Nav -->
 
 <body class="container-fluid"> 
+	
+	<div class="row card">
+		<div class="weather-view col-xs-12 col-sm-8 col-sm-offset-2">
+			<div id="location" class="col-md-12"></div>
+			<hr>
+			
+			<!-- weather icons -->
+			<div class=" col-xs-10 ">
+				<div class="icon sun-shower">
+				  <div class="cloud"></div>
+				  <div class="sun">
+				    <div class="rays"></div>
+				  </div>
+				  <div class="rain"></div>			  
+				</div>					
+			</div>
 
-	<div id="forecast" onclick="gettingJSON()">TEST</div>
+			<!-- temp and celsius/faren buttons -->
+			<div class="col-xs-12">
+				<div class="col-xs-7" id="temp"></div>
+				<div class="tempButtons col-xs-5 ">
+					<a class='fahrenheit active' id='fahrenheit'" href="#">&deg;F</a>
+			        <span class='divider secondary'>|</span>
+			        <a class='celsius' id='celsius' href="#">&deg;C</a>					
+				</div>				
+			</div>
+
+			<!-- weather desc -->
+			<div id="weatherDescription" class="col-xs-12"></div>
+			<hr class="col-xs-12">
+			
+			<!-- additional weather stats  -->
+			<div>
+				<div class="col-xs-6">
+					<img class="weather-stats-icons" src="icon_humidity.png" alt="humidity-icon">
+					<div id="humidity"></div>				
+				</div>
+
+				<div class="col-xs-6">
+					<img class="weather-stats-icons" src="icon_wind.png" alt="wind-icon">
+					<div id="wind" ></div>
+				</div>				
+			</div>
+			
+			
+			
+				
+			
+			
+								
+		</div>		
+	</div>
+
 
 
 </body><!--  end body  -->
