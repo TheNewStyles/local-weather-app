@@ -70,7 +70,6 @@ $(document).ready(function() {
     	var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
     	var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
 
-    	console.log(weatherIcons);
     	//Determine which icon to add    	
     	switch (weatherIcons) {
     		//Clear Sky
