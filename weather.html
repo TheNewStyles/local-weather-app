@@ -46,44 +46,39 @@
 
 <body class="container-fluid"> 
 	
-	<div class="row card">
-		<div class="weather-view col-xs-12 col-sm-8 col-sm-offset-2">
+	<div class="card">
+		<div class="weather-view col-xs-12 col-sm-6 col-sm-offset-3">
 			<div id="location" class="col-md-12"></div>
-			<hr>
+			<!-- weather desc -->
+			<div id="weatherDescription" class="col-xs-12"></div>
+			
 			
 			<!-- weather icons -->
-			<div class=" col-xs-10 ">
-				<div class="icon sun-shower">
-				  <div class="cloud"></div>
-				  <div class="sun">
-				    <div class="rays"></div>
-				  </div>
-				  <div class="rain"></div>			  
-				</div>					
+			<div class=" col-xs-12 col-lg-6" id="icons">
+			
 			</div>
 
 			<!-- temp and celsius/faren buttons -->
-			<div class="col-xs-12">
-				<div class="col-xs-7" id="temp"></div>
-				<div class="tempButtons col-xs-5 ">
-					<a class='fahrenheit active' id='fahrenheit'" href="#">&deg;F</a>
+			<div class="col-xs-12 col-lg-6" id="tempAndButtons">
+				<div class="col-xs-7 " id="temp"></div>
+				<div class="tempButtons col-xs-5 col-sm-4">
+					<a class='fahrenheit tempActive' id='fahrenheit'" >&deg;F</a>
 			        <span class='divider secondary'>|</span>
-			        <a class='celsius' id='celsius' href="#">&deg;C</a>					
+			        <a class='celsius' id='celsius' >&deg;C</a>					
 				</div>				
 			</div>
 
-			<!-- weather desc -->
-			<div id="weatherDescription" class="col-xs-12"></div>
+			
 			<hr class="col-xs-12">
 			
 			<!-- additional weather stats  -->
 			<div>
-				<div class="col-xs-6">
+				<div class="col-xs-6 col-sm-4 col-sm-offset-2">
 					<img class="weather-stats-icons" src="icon_humidity.png" alt="humidity-icon">
 					<div id="humidity"></div>				
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-xs-6 col-sm-4">
 					<img class="weather-stats-icons" src="icon_wind.png" alt="wind-icon">
 					<div id="wind" ></div>
 				</div>				
