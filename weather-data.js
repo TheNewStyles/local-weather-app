@@ -7,7 +7,7 @@ function closeNav(){
   document.getElementById("nav").style.height = "0%";
 }
 
-$(document).ready(function() {	
+// $(document).ready(function() {
 
 	//add current cities json info to html
     $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
@@ -147,7 +147,7 @@ $(document).ready(function() {
 		return apiUrlFull;
 	}
 
-});
+// });
 
 
 
