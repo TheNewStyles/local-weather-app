@@ -57,7 +57,6 @@ function getLocationZip(){
 //     }
 // }
 
-console.log(geoSuccess());
 
 function createAPIKeyWithCurrentLocation(){
     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
