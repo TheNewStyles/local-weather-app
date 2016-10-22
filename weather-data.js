@@ -58,7 +58,7 @@ function geoError(error){
 }
 
 function createAPIKeyWithCurrentLocation(){
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+    var apiUrl = "https://crossorigin.me/https://api.openweathermap.org/data/2.5/weather?q=";
     var units = "&units=imperial";
     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
     //add together key
