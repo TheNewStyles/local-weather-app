@@ -32,8 +32,12 @@ if(navigator.geolocation){
 }
 
 function geoSuccess(position){
-    console.log('Latitude: '+position.coords.latitude+'Longitude: '+position.coords.longitude);
-    return "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+    
+    var lat = Math.floor(position.coords.latitude);
+    var lon = Math.floor(position.coords.longitude);
+    console.log('Latitude: '+ lat + 'Longitude:' + lon);
+
+    return "lat=" + lat + "&lon=" + lon;
 }
 
 function geoError(error){
