@@ -19,43 +19,43 @@ function getLocationZip(){
  return localZip;
 }
 
-if(navigator.geolocation){
-    var optn = {
-            enableHighAccuracy : true,
-            timeout : Infinity,
-            maximumAge : 0
-        };
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
-}else{
-    alert('Geolocation is not supported in your browser');
-    //set to chicago
-}
+// if(navigator.geolocation){
+//     var optn = {
+//             enableHighAccuracy : true,
+//             timeout : Infinity,
+//             maximumAge : 0
+//         };
+//     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
+// }else{
+//     alert('Geolocation is not supported in your browser');
+//     //set to chicago
+// }
 
-function geoSuccess(position){
+// function geoSuccess(position){
     
-    var lat = Math.floor(position.coords.latitude);
-    var lon = Math.floor(position.coords.longitude);
-    console.log('Latitude: '+ lat + 'Longitude: ' + lon);
+//     var lat = Math.floor(position.coords.latitude);
+//     var lon = Math.floor(position.coords.longitude);
+//     console.log('Latitude: '+ lat + 'Longitude: ' + lon);
 
-    return "lat=" + lat + "&lon=" + lon;
-}
+//     return "lat=" + lat + "&lon=" + lon;
+// }
 
-function geoError(error){
-    switch(error.code) {
-    case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-    }
-}
+// function geoError(error){
+//     switch(error.code) {
+//     case error.PERMISSION_DENIED:
+//         alert("User denied the request for Geolocation.");
+//         break;
+//     case error.POSITION_UNAVAILABLE:
+//         alert("Location information is unavailable.");
+//         break;
+//     case error.TIMEOUT:
+//         alert("The request to get user location timed out.");
+//         break;
+//     case error.UNKNOWN_ERROR:
+//         alert("An unknown error occurred.");
+//         break;
+//     }
+// }
 
 console.log(geoSuccess());
 
