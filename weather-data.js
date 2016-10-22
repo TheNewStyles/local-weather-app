@@ -7,63 +7,63 @@ function closeNav(){
   document.getElementById("nav").style.height = "0%";
 }
 
-function getLocationZip(){
-     $.ajax({
-     url: "https://crossorigin.me/http://ip-api.com/json/",
-     async: false,
-     dataType: 'json',
-     success: function(ip){
-         localZip = ip.zip;      
-     }
- });
- return localZip;
+// function getLocationZip(){
+//      $.ajax({
+//      url: "https://ip-api.com/json/",
+//      async: false,
+//      dataType: 'json',
+//      success: function(ip){
+//          localZip = ip.zip;      
+//      }
+//  });
+//  return localZip;
+// }
+
+if(navigator.geolocation){
+    var optn = {
+            enableHighAccuracy : true,
+            timeout : Infinity,
+            maximumAge : 0
+        };
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
+}else{
+    alert('Geolocation is not supported in your browser');
+    //set to chicago
 }
 
-// if(navigator.geolocation){
-//     var optn = {
-//             enableHighAccuracy : true,
-//             timeout : Infinity,
-//             maximumAge : 0
-//         };
-//     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
-// }else{
-//     alert('Geolocation is not supported in your browser');
-//     //set to chicago
-// }
-
-// function geoSuccess(position){
+function geoSuccess(position){
     
-//     var lat = Math.floor(position.coords.latitude);
-//     var lon = Math.floor(position.coords.longitude);
-//     console.log('Latitude: '+ lat + 'Longitude: ' + lon);
+    var lat = Math.floor(position.coords.latitude);
+    var lon = Math.floor(position.coords.longitude);
+    var zip = position.address.postalCode;
+    console.log(position.address.postalCode);
 
-//     return "lat=" + lat + "&lon=" + lon;
-// }
+    return zip;
+}
 
-// function geoError(error){
-//     switch(error.code) {
-//     case error.PERMISSION_DENIED:
-//         alert("User denied the request for Geolocation.");
-//         break;
-//     case error.POSITION_UNAVAILABLE:
-//         alert("Location information is unavailable.");
-//         break;
-//     case error.TIMEOUT:
-//         alert("The request to get user location timed out.");
-//         break;
-//     case error.UNKNOWN_ERROR:
-//         alert("An unknown error occurred.");
-//         break;
-//     }
-// }
-
+function geoError(error){
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+    case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+    case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+}
 
 function createAPIKeyWithCurrentLocation(){
     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
     var units = "&units=imperial";
     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
     //add together key
-    var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;
+    var apiUrlFull = apiUrl + geoSuccess + units + apiKey;
 
     return apiUrlFull;
 }
