@@ -68,6 +68,7 @@ function geoSuccess(position){
         var latLon = lat + lon;
         //add together key
         var apiUrlFull = apiUrl + latLon + units + apiKey;
+        console.log(apiUrlFull);
 
         return apiUrlFull;
     }
