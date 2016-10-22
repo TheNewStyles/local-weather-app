@@ -64,7 +64,7 @@ function createAPIKeyWithCurrentLocation(){
     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
     var units = "&units=imperial";
     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-    var latLon = getLongitude() + getLongitude();
+    var latLon = getLatitude() + getLongitude();
     //add together key
     var apiUrlFull = apiUrl + latLon + units + apiKey;
 
