@@ -33,14 +33,16 @@ if(navigator.geolocation){
 
 function geoSuccess(position){
     
-    function getLatitude(){
-        console.log(position.coords.latitude);
-        return 'lat=' + Math.floor(position.coords.latitude);
-    }
-    function getLongitude(){
-        console.log(position.coords.longitude);
-        return '&lon' + Math.floor(position.coords.longitude);
-    }
+    lat = 'lat=' + Math.floor(position.coords.latitude);
+    lon = '&lon' + Math.floor(position.coords.longitude);
+    // function getLatitude(){
+    //     console.log(position.coords.latitude);
+    //     return 'lat=' + Math.floor(position.coords.latitude);
+    // }
+    // function getLongitude(){
+    //     console.log(position.coords.longitude);
+    //     return '&lon' + Math.floor(position.coords.longitude);
+    // }
 }
 
 function geoError(error){
@@ -64,7 +66,7 @@ function createAPIKeyWithCurrentLocation(){
     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
     var units = "&units=imperial";
     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-    var latLon = getLatitude() + getLongitude();
+    var latLon = lat + lon;
     //add together key
     var apiUrlFull = apiUrl + latLon + units + apiKey;
 
