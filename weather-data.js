@@ -7,17 +7,17 @@ function closeNav(){
   document.getElementById("nav").style.height = "0%";
 }
 
-// function getLocationZip(){
-//      $.ajax({
-//      url: "https://ip-api.com/json/",
-//      async: false,
-//      dataType: 'json',
-//      success: function(ip){
-//          localZip = ip.zip;      
-//      }
-//  });
-//  return localZip;
-// }
+function getLocationZip(){
+     $.ajax({
+     url: "https://ip-api.com/json/",
+     async: false,
+     dataType: 'json',
+     success: function(ip){
+         localZip = ip.zip;      
+     }
+ });
+ return localZip;
+}
 
 if(navigator.geolocation){
     var optn = {
@@ -35,7 +35,7 @@ function geoSuccess(position){
     
     var lat = Math.floor(position.coords.latitude);
     var lon = Math.floor(position.coords.longitude);
-    console.log('Latitude: '+ lat + 'Longitude:' + lon);
+    console.log('Latitude: '+ lat + 'Longitude: ' + lon);
 
     return "lat=" + lat + "&lon=" + lon;
 }
@@ -57,12 +57,14 @@ function geoError(error){
     }
 }
 
+console.log(geoSuccess());
+
 function createAPIKeyWithCurrentLocation(){
     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?q=";
     var units = "&units=imperial";
     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
     //add together key
-    var apiUrlFull = apiUrl + geoSuccess + units + apiKey;
+    var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;
 
     return apiUrlFull;
 }
