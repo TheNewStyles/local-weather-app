@@ -31,6 +31,23 @@ if(navigator.geolocation){
     //set to chicago
 }
 
+function geoError(error){
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+    case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+    case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+}
+
 function geoSuccess(position){
     
     var lat = 'lat=' + Math.floor(position.coords.latitude);
@@ -55,35 +72,15 @@ function geoSuccess(position){
         return apiUrlFull;
     }
 
-}
-
-function geoError(error){
-    switch(error.code) {
-    case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-    }
-}
-
-
 
 $(document).ready(function() {
 
-	//add current cities json info to html
+    //add current cities json info to html
     $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
 
-    	// City Temp
-    	var cityTemp = JSON.stringify(weather.main.temp);
-    	var cityTempRounded = Math.floor(cityTemp);
+        // City Temp
+        var cityTemp = JSON.stringify(weather.main.temp);
+        var cityTempRounded = Math.floor(cityTemp);
         $('#temp').text(cityTempRounded); 
         // City Name
         var cityName = JSON.stringify(weather.name);
@@ -95,11 +92,11 @@ $(document).ready(function() {
         var weatherDescriptionNoQuotes = titleCase(weatherDescriptionNoQuotes);
         $('#weatherDescription').text(weatherDescriptionNoQuotes);
         // Wind Speed
-    	var windSpeed = JSON.stringify(weather.wind.speed);
-    	var windSpeedRounded = Math.floor(windSpeed);
+        var windSpeed = JSON.stringify(weather.wind.speed);
+        var windSpeedRounded = Math.floor(windSpeed);
         $('#wind').text(windSpeedRounded); 
         // Humidity
-    	var humidity = JSON.stringify(weather.main.humidity);    	
+        var humidity = JSON.stringify(weather.main.humidity);       
         $('#humidity').text(humidity); 
         // Weather Icons
         var weatherIcons = weather.weather[0].icon;
@@ -108,93 +105,100 @@ $(document).ready(function() {
         document.getElementById("fahrenheit").addEventListener("click", addFahrenTemp);
 
         function convertFahrenToCelsius(tempInFaren){
-    		return Math.floor((tempInFaren-32) * (5/9));
-    	}
+            return Math.floor((tempInFaren-32) * (5/9));
+        }
 
-    	function addCelsiusTemp(){
-    		$('#temp').text(convertFahrenToCelsius(cityTempRounded));
-    		$('#celsius').addClass('tempActive');
-    		$('#fahrenheit').removeClass('tempActive');
-    	}
+        function addCelsiusTemp(){
+            $('#temp').text(convertFahrenToCelsius(cityTempRounded));
+            $('#celsius').addClass('tempActive');
+            $('#fahrenheit').removeClass('tempActive');
+        }
 
-    	function addFahrenTemp(){
-    		$('#temp').text(cityTempRounded);    		
-    		$('#fahrenheit').addClass('tempActive');
-    		$('#celsius').removeClass('tempActive');
-    	}
+        function addFahrenTemp(){
+            $('#temp').text(cityTempRounded);           
+            $('#fahrenheit').addClass('tempActive');
+            $('#celsius').removeClass('tempActive');
+        }
 
-    	function titleCase(str) {
-		  str = str.split(' ');
-		  var length = str.length;
-		  for (var i = 0; i < length; i++) {
-		    str[i] = str[i][0].toUpperCase() + str[i].substring(1);
-		  }
-		  return str.join(' ');
-		}
+        function titleCase(str) {
+          str = str.split(' ');
+          var length = str.length;
+          for (var i = 0; i < length; i++) {
+            str[i] = str[i][0].toUpperCase() + str[i].substring(1);
+          }
+          return str.join(' ');
+        }
 
-		var sunShowerIcon = $("<div class='icon sun-shower'><div class='cloud'></div><div class='sun'><div class='rays'></div></div><div class='rain'></div></div>");
-    	var thunderStormIcon = $("<div class='icon thunder-storm'><div class='cloud'></div><div class='lightning'><div class='bolt'></div><div class='bolt'></div></div></div>");
-    	var cloudyIcon = $("<div class='icon cloudy'><div class='cloud'></div><div class='cloud'></div></div>");
-    	var snowFlurriesIcon = $("<div class='icon flurries'><div class='cloud'></div><div class='snow'><div class='flake'></div><div class='flake'></div></div></div>");
-    	var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
-    	var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
+        var sunShowerIcon = $("<div class='icon sun-shower'><div class='cloud'></div><div class='sun'><div class='rays'></div></div><div class='rain'></div></div>");
+        var thunderStormIcon = $("<div class='icon thunder-storm'><div class='cloud'></div><div class='lightning'><div class='bolt'></div><div class='bolt'></div></div></div>");
+        var cloudyIcon = $("<div class='icon cloudy'><div class='cloud'></div><div class='cloud'></div></div>");
+        var snowFlurriesIcon = $("<div class='icon flurries'><div class='cloud'></div><div class='snow'><div class='flake'></div><div class='flake'></div></div></div>");
+        var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
+        var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
 
-    	//Determine which icon to add    	
-    	switch (weatherIcons) {
-    		//Clear Sky
-    		case "01d":
-    		case "01n":   			
-    			$('#icons').append(sunnyIcon);
-    			break;
-    		//Few Clouds
-    		case "02d":   
-    		case "02n": 			
-    			$('#icons').append(cloudyIcon);    			
-    			break;
-    		//Scattered clouds
-    		case "03d": 
-    		case "03n":   			
-    			$('#icons').append(cloudyIcon);
-    			break;
-    		//Broken clouds
-    		case "04d": 
-    		case "04n":   			
-    			$('#icons').append(cloudyIcon);
-    			break;
-    		//Shower rain
-    		case "09d":  
-    		case "09n":  			
-    			$('#icons').append(sunShowerIcon);
-    			break;
-    		//Rain
-    		case "10d":
-    		case "10n":    			
-    			$('#icons').append(rainyIcon);
-    			break;
-    		//ThunderStom
-    		case "11d":    	
-    		case "11n":		
-    			$('#icons').append(thunderStormIcon);
-    			break;
-    		//Snow
-    		case "13d":  
-    		case "13n":  			
-    			$('#icons').append(snowFlurriesIcon);
-    			break;
-    		//Mist
-    		case "50d":  
-    		case "50n":  			
-    			$('#icons').append(rainyIcon);
-    			break;    			
-    		default:
-    			$('#icons').append(sunnyIcon);
-    			break;
-    	}
+        //Determine which icon to add       
+        switch (weatherIcons) {
+            //Clear Sky
+            case "01d":
+            case "01n":             
+                $('#icons').append(sunnyIcon);
+                break;
+            //Few Clouds
+            case "02d":   
+            case "02n":             
+                $('#icons').append(cloudyIcon);             
+                break;
+            //Scattered clouds
+            case "03d": 
+            case "03n":             
+                $('#icons').append(cloudyIcon);
+                break;
+            //Broken clouds
+            case "04d": 
+            case "04n":             
+                $('#icons').append(cloudyIcon);
+                break;
+            //Shower rain
+            case "09d":  
+            case "09n":             
+                $('#icons').append(sunShowerIcon);
+                break;
+            //Rain
+            case "10d":
+            case "10n":             
+                $('#icons').append(rainyIcon);
+                break;
+            //ThunderStom
+            case "11d":     
+            case "11n":     
+                $('#icons').append(thunderStormIcon);
+                break;
+            //Snow
+            case "13d":  
+            case "13n":             
+                $('#icons').append(snowFlurriesIcon);
+                break;
+            //Mist
+            case "50d":  
+            case "50n":             
+                $('#icons').append(rainyIcon);
+                break;              
+            default:
+                $('#icons').append(sunnyIcon);
+                break;
+        }
 
     });
 
 
 });
+
+}
+
+
+
+
+
 
 
 
