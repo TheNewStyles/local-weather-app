@@ -50,8 +50,8 @@ function geoError(error){
 
 function geoSuccess(position){
     
-    var lat = 'lat=' + Math.floor(position.coords.latitude);
-    var lon = '&lon=' + Math.floor(position.coords.longitude);
+    var lat = 'lat=' + position.coords.latitude;
+    var lon = '&lon=' + position.coords.longitude;
     // function getLatitude(){
     //     console.log(position.coords.latitude);
     //     return 'lat=' + Math.floor(position.coords.latitude);
