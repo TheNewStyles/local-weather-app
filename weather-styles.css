@@ -4,16 +4,19 @@ html{
 
 body {  
   background-image:  url('background.jpg'); 
-  background-repeat: no-repeat;
   background-position: bottom left center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height:500px;
+  min-height:100vh;
   font-family: 'Roboto', sans-serif;
   text-align: center;  
   height: 100%;
+}
+
+.hum-wind{
+  padding-bottom: 15px;
 }
 
 .card{
