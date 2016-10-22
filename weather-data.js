@@ -9,7 +9,7 @@ function closeNav(){
 
 function getLocationZip(){
      $.ajax({
-     url: "https://ip-api.com/json/",
+     url: "https://crossorigin.me/http://ip-api.com/json/",
      async: false,
      dataType: 'json',
      success: function(ip){
