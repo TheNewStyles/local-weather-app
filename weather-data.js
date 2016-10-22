@@ -68,7 +68,7 @@ function createAPIKeyWithCurrentLocation(){
 }
 
 
-// $(document).ready(function() {
+$(document).ready(function() {
 
 	//add current cities json info to html
     $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
