@@ -7,17 +7,17 @@ function closeNav(){
   document.getElementById("nav").style.height = "0%";
 }
 
-// function getLocationZip(){
-//      $.ajax({
-//      url: "https://ip-api.com/json/",
-//      async: false,
-//      dataType: 'json',
-//      success: function(ip){
-//          localZip = ip.zip;      
-//      }
-//  });
-//  return localZip;
-// }
+function getLocationZip(){
+     $.ajax({
+     url: "https://crossorigin.me/http://ip-api.com/json/",
+     async: false,
+     dataType: 'json',
+     success: function(ip){
+         localZip = ip.zip;      
+     }
+ });
+ return localZip + ",us";
+}
 
 if(navigator.geolocation){
     var optn = {
@@ -49,9 +49,11 @@ function geoError(error){
 }
 
 function geoSuccess(position){
-    
-    var lat = 'lat=' + position.coords.latitude;
-    var lon = '&lon=' + position.coords.longitude;
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    var lat = 'lat=' + latitude.toFixed(2);
+    var lon = '&lon=' + longitude.toFixed(2);
 
     function createAPIKeyWithCurrentLocation(){
         var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
@@ -63,6 +65,17 @@ function geoSuccess(position){
 
         return apiUrlFull;
     }
+
+    // function createAPIKeyWithCurrentLocation(){
+    //     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?zip=";
+    //     var units = "&units=imperial";
+    //     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
+    //     //var latLon = lat + lon;
+    //     //add together key
+    //     var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;  
+
+    //     return apiUrlFull;
+    // }
 
 
 $(document).ready(function() {
