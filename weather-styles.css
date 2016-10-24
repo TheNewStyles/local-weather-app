@@ -3,7 +3,7 @@ html{
 }
 
 body {  
-  background-image:  url('background.jpg'); 
+  background-image:  url('images/background.jpg'); 
   background-position: bottom left center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -70,9 +70,9 @@ body {
   font-weight: 500;
 }
 
-div .tempButtons:hover {
-  text-decoration: none;  
-  color: white;
+.tempButtons:hover {
+  text-decoration: none !important;  
+  color: white !important;
 }
 
 .tempButtons :focus{
