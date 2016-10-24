@@ -70,8 +70,9 @@ body {
   font-weight: 500;
 }
 
-.tempButtons :hover {
+.tempButtons a :hover {
   text-decoration: none;  
+  color: white;
 }
 
 .tempButtons :focus{
@@ -99,15 +100,25 @@ body {
 
 @media only screen and (max-width: 500px) {
     .icon{
-      font-size: .75em !important;
+      font-size: .5em !important;
     }
     #temp{
-      font-size: 3.5em;
+      font-size: 3em;
     }
     .tempButtons{
       top: .8em;
       padding-right: 0% !important;
       padding-left: 0% !important; 
+    }
+    #location{
+      font-size: 1.5em;
+    }
+    .weather-stats-icons {
+      max-height: 50px;
+      max-width: 112px;
+    }
+    .weather-view{
+      top: 1.2em;
     }
 }
 
