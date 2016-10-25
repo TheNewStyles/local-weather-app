@@ -7,17 +7,17 @@ function closeNav(){
   document.getElementById("nav").style.height = "0%";
 }
 
-function getLocationZip(){
-     $.ajax({
-     url: "https://crossorigin.me/http://ip-api.com/json/",
-     async: false,
-     dataType: 'json',
-     success: function(ip){
-         localZip = ip.zip;      
-     }
- });
- return localZip + ",us";
-}
+// function getLocationZip(){
+//      $.ajax({
+//      url: "https://crossorigin.me/http://ip-api.com/json/",
+//      async: false,
+//      dataType: 'json',
+//      success: function(ip){
+//          localZip = ip.zip;      
+//      }
+//  });
+//  return localZip + ",us";
+// }
 
 if(navigator.geolocation){
     var optn = {
