@@ -15,6 +15,11 @@ body {
   height: 100%;
 }
 
+a:focus, a:hover{
+    color: white;
+    text-decoration: none;
+}
+
 .hum-wind{
   padding-bottom: 15px;
 }
@@ -152,6 +157,7 @@ body {
   overflow-x: hidden;
   transition: 0.5s;
   overflow: hidden;
+  font-family: 'Oswald', sans-serif;
 }
 
 .overlay-content {
@@ -165,7 +171,7 @@ body {
 .overlay a {
   padding: 8px;
   text-decoration: none;
-  font-size: 36px;
+  font-size: 50px;
   color: #e7ecef;
   display: block;
   transition: 0.3s;
