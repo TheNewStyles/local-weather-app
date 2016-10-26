@@ -49,9 +49,7 @@ function geoError(error){
     }
 }
 
-function geoSuccess(position){
-    $('.loader').hide();
-    $('.tempButtons').show();
+function geoSuccess(position){    
 
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
@@ -86,6 +84,8 @@ $(document).ready(function() {
 
     //add current cities json info to html
     $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
+        $('.loader').hide();
+        $('.tempButtons').show();
 
         // City Temp
         var cityTemp = JSON.stringify(weather.main.temp);
