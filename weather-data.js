@@ -18,6 +18,7 @@ function closeNav(){
 //  });
 //  return localZip + ",us";
 // }
+$('.tempButtons').hide();
 
 if(navigator.geolocation){
     var optn = {
@@ -49,6 +50,9 @@ function geoError(error){
 }
 
 function geoSuccess(position){
+    $('.loader').hide();
+    $('.tempButtons').show();
+
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 
