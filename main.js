@@ -51,16 +51,6 @@ $( document ).ready(function() {
         var lat = 'lat=' + latitude.toFixed(2);
         var lon = '&lon=' + longitude.toFixed(2);
 
-        function createAPIKeyWithCurrentLocation(){
-            var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
-            var units = "&units=imperial";
-            var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-            var latLon = lat + lon;
-            aipUrl = apiUrl + latLon + units + apiKey;
-
-            return aipUrl;
-        }
-
         //add current cities json info to html
         $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
             $('.loader').hide();
@@ -68,24 +58,19 @@ $( document ).ready(function() {
 
             // City Temp
             var cityTemp = JSON.stringify(weather.main.temp);
-            var cityTempRounded = Math.floor(cityTemp);
-            $('#temp').text(cityTempRounded);
+            cityTemp = Math.floor(cityTemp);
+            $('#temp').text(cityTemp);
 
             // City Name
-            var cityName = JSON.stringify(weather.name);
-            var cityNameNoQuotes = cityName.replace(/\"/g, "");
-            $('#location').text(cityNameNoQuotes);
+            $('#location').text(removeQuotes(JSON.stringify(weather.name)));
 
             // Weather Description
-            var weatherDescription = JSON.stringify(weather.weather[0].description);
-            var weatherDescriptionNoQuotes = weatherDescription.replace(/\"/g, "");
-            weatherDescriptionNoQuotes = titleCase(weatherDescriptionNoQuotes);
-            $('#weatherDescription').text(weatherDescriptionNoQuotes);
+            var weatherDescription = removeQuotes(JSON.stringify(weather.weather[0].description));
+            $('#weatherDescription').text(titleCase(weatherDescription));
 
             // Wind Speed
             var windSpeed = JSON.stringify(weather.wind.speed);
-            var windSpeedRounded = Math.floor(windSpeed);
-            $('#wind').text(windSpeedRounded);
+            $('#wind').text(Math.floor(windSpeed));
 
             // Humidity
             var humidity = JSON.stringify(weather.main.humidity);
@@ -95,11 +80,11 @@ $( document ).ready(function() {
             var weatherIcons = weather.weather[0].icon;
 
             $celsius.click(function() {
-                addCelsiusTemp(cityTempRounded);
+                addCelsiusTemp(cityTemp);
             });
 
             $fahrenheit.click(function() {
-                addFahrenTemp(cityTempRounded);
+                addFahrenTemp(cityTemp);
             });
 
             //Determine which icon to add
@@ -160,6 +145,16 @@ $( document ).ready(function() {
             }
         }
 
+        function createAPIKeyWithCurrentLocation(){
+            var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
+            var units = "&units=imperial";
+            var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
+            var latLon = lat + lon;
+            aipUrl = apiUrl + latLon + units + apiKey;
+
+            return aipUrl;
+        }
+
         function addCelsiusTemp(cityTempRounded){
             $('#temp').text(convertFahrenToCelsius(cityTempRounded));
             $celsius.addClass('tempActive');
@@ -183,6 +178,10 @@ $( document ).ready(function() {
                 str[i] = str[i][0].toUpperCase() + str[i].substring(1);
             }
             return str.join(' ');
+        }
+
+        function removeQuotes(str) {
+            return str.replace(/\"/g, "");
         }
 
     }//end geosuccess
