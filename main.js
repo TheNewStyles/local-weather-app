@@ -1,67 +1,68 @@
-// function getLocationZip(){
-//      $.ajax({
-//      url: "https://crossorigin.me/http://ip-api.com/json/",
-//      async: false,
-//      dataType: 'json',
-//      success: function(ip){
-//          localZip = ip.zip;      
-//      }
-//  });
-//  return localZip + ",us";
-// }
+$( document ).ready(function() {
 
-// function createAPIKeyWithCurrentLocation(){
-//     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?zip=";
-//     var units = "&units=imperial";
-//     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-//     //var latLon = lat + lon;
-//     //add together key
-//     var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;
+    var $icons = $("#icons");
+    var $celsius = $("#celsius");
+    var $fahrenheit = $("#fahrenheit");
 
-//     return apiUrlFull;
-// }
+    var sunShowerIcon = $("<div class='icon sun-shower'><div class='cloud'></div><div class='sun'><div class='rays'></div></div><div class='rain'></div></div>");
+    var thunderStormIcon = $("<div class='icon thunder-storm'><div class='cloud'></div><div class='lightning'><div class='bolt'></div><div class='bolt'></div></div></div>");
+    var cloudyIcon = $("<div class='icon cloudy'><div class='cloud'></div><div class='cloud'></div></div>");
+    var snowFlurriesIcon = $("<div class='icon flurries'><div class='cloud'></div><div class='snow'><div class='flake'></div><div class='flake'></div></div></div>");
+    var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
+    var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
 
+    (function(){
+        if (navigator.geolocation) {
+            var optn = {
+                enableHighAccuracy : true,
+                timeout : Infinity,
+                maximumAge : 0
+            };
+            navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
+        } else {
+            alert('Geolocation is not supported in your browser');
+        }
+    })();
 
-if (navigator.geolocation) {
-    var optn = {
-            enableHighAccuracy : true,
-            timeout : Infinity,
-            maximumAge : 0
-        };
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, optn);
-} else {
-    alert('Geolocation is not supported in your browser');
-}
-
-//This function is called on error
-function geoError(error){
-    switch (error.code) {
-    case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
+    //This function is called on error
+    function geoError(error){
+        switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+        }
     }
-}
 
-//This function is called on success
-function geoSuccess(position) {
+    //This function is called on success
+    function geoSuccess(position) {
 
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
 
-    var lat = 'lat=' + latitude.toFixed(2);
-    var lon = '&lon=' + longitude.toFixed(2);
+        var lat = 'lat=' + latitude.toFixed(2);
+        var lon = '&lon=' + longitude.toFixed(2);
 
-    //add current cities json info to html
-    $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
+        function createAPIKeyWithCurrentLocation(){
+            var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
+            var units = "&units=imperial";
+            var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
+            var latLon = lat + lon;
+            aipUrl = apiUrl + latLon + units + apiKey;
+
+            return aipUrl;
+        }
+
+        //add current cities json info to html
+        $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
             $('.loader').hide();
             $('.tempButtons').show();
 
@@ -69,38 +70,44 @@ function geoSuccess(position) {
             var cityTemp = JSON.stringify(weather.main.temp);
             var cityTempRounded = Math.floor(cityTemp);
             $('#temp').text(cityTempRounded);
+
             // City Name
             var cityName = JSON.stringify(weather.name);
             var cityNameNoQuotes = cityName.replace(/\"/g, "");
             $('#location').text(cityNameNoQuotes);
+
             // Weather Description
             var weatherDescription = JSON.stringify(weather.weather[0].description);
             var weatherDescriptionNoQuotes = weatherDescription.replace(/\"/g, "");
             weatherDescriptionNoQuotes = titleCase(weatherDescriptionNoQuotes);
             $('#weatherDescription').text(weatherDescriptionNoQuotes);
+
             // Wind Speed
             var windSpeed = JSON.stringify(weather.wind.speed);
             var windSpeedRounded = Math.floor(windSpeed);
             $('#wind').text(windSpeedRounded);
+
             // Humidity
             var humidity = JSON.stringify(weather.main.humidity);
             $('#humidity').text(humidity);
+
             // Weather Icons
             var weatherIcons = weather.weather[0].icon;
 
-            document.getElementById("celsius").addEventListener("click", addCelsiusTemp);
-            document.getElementById("fahrenheit").addEventListener("click", addFahrenTemp);
-            var $icons = document.getElementById("#icons");
+            $celsius.click(function() {
+                addCelsiusTemp(cityTempRounded);
+            });
 
-
-            var sunShowerIcon = $("<div class='icon sun-shower'><div class='cloud'></div><div class='sun'><div class='rays'></div></div><div class='rain'></div></div>");
-            var thunderStormIcon = $("<div class='icon thunder-storm'><div class='cloud'></div><div class='lightning'><div class='bolt'></div><div class='bolt'></div></div></div>");
-            var cloudyIcon = $("<div class='icon cloudy'><div class='cloud'></div><div class='cloud'></div></div>");
-            var snowFlurriesIcon = $("<div class='icon flurries'><div class='cloud'></div><div class='snow'><div class='flake'></div><div class='flake'></div></div></div>");
-            var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
-            var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
+            $fahrenheit.click(function() {
+                addFahrenTemp(cityTempRounded);
+            });
 
             //Determine which icon to add
+            displayWeatherIcon(weatherIcons);
+
+        }); //end getJSON
+
+        function displayWeatherIcon(weatherIcons) {
             switch (weatherIcons) {
                 //Clear Sky
                 case "01d":
@@ -151,33 +158,22 @@ function geoSuccess(position) {
                     $icons.append(sunnyIcon);
                     break;
             }
-
-        });
-
-        function createAPIKeyWithCurrentLocation(){
-            var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
-            var units = "&units=imperial";
-            var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-            var latLon = lat + lon;
-            var apiUrlFull = apiUrl + latLon + units + apiKey;
-
-            return apiUrlFull;
         }
 
-        function addCelsiusTemp(){
+        function addCelsiusTemp(cityTempRounded){
             $('#temp').text(convertFahrenToCelsius(cityTempRounded));
-            $('#celsius').addClass('tempActive');
-            $('#fahrenheit').removeClass('tempActive');
+            $celsius.addClass('tempActive');
+            $fahrenheit.removeClass('tempActive');
         }
 
         function convertFahrenToCelsius(tempInFaren){
             return Math.floor((tempInFaren-32) * (5/9));
         }
 
-        function addFahrenTemp(){
+        function addFahrenTemp(cityTempRounded){
             $('#temp').text(cityTempRounded);
-            $('#fahrenheit').addClass('tempActive');
-            $('#celsius').removeClass('tempActive');
+            $fahrenheit.addClass('tempActive');
+            $celsius.removeClass('tempActive');
         }
 
         function titleCase(str) {
@@ -188,11 +184,35 @@ function geoSuccess(position) {
             }
             return str.join(' ');
         }
-}
+
+    }//end geosuccess
+
+});//end jquery
 
 
+//this was the way I was able to get location before publishing on github pages.
+// function getLocationZip(){
+//      $.ajax({
+//      url: "https://crossorigin.me/http://ip-api.com/json/",
+//      async: false,
+//      dataType: 'json',
+//      success: function(ip){
+//          localZip = ip.zip;
+//      }
+//  });
+//  return localZip + ",us";
+// }
 
+// function createAPIKeyWithCurrentLocation(){
+//     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?zip=";
+//     var units = "&units=imperial";
+//     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
+//     //var latLon = lat + lon;
+//     //add together key
+//     var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;
 
+//     return apiUrlFull;
+// }
 
 
 
