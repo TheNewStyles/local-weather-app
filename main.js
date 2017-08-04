@@ -11,7 +11,9 @@ $( document ).ready(function() {
     var sunnyIcon = $("<div class='icon sunny'><div class='sun'><div class='rays'></div></div></div>");
     var rainyIcon = $("<div class='icon rainy'><div class='cloud'></div><div class='rain'></div></div>");
 
-    (function(){
+    startUp();
+
+    function startUp() {
         if (navigator.geolocation) {
             var optn = {
                 enableHighAccuracy : true,
@@ -22,7 +24,7 @@ $( document ).ready(function() {
         } else {
             alert('Geolocation is not supported in your browser');
         }
-    })();
+    }
 
     //This function is called on error
     function geoError(error){
@@ -52,7 +54,7 @@ $( document ).ready(function() {
         var lon = '&lon=' + longitude.toFixed(2);
 
         //add current cities json info to html
-        $.getJSON(createAPIKeyWithCurrentLocation() ,function(weather){
+        $.getJSON(getAPIKeyWithCurrentLocation() ,function(weather){
             $('.loader').hide();
             $('.tempButtons').show();
 
@@ -87,10 +89,9 @@ $( document ).ready(function() {
                 addFahrenTemp(cityTemp);
             });
 
-            //Determine which icon to add
             displayWeatherIcon(weatherIcons);
 
-        }); //end getJSON
+        });
 
         function displayWeatherIcon(weatherIcons) {
             switch (weatherIcons) {
@@ -145,8 +146,8 @@ $( document ).ready(function() {
             }
         }
 
-        function createAPIKeyWithCurrentLocation(){
-            var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?";
+        function getAPIKeyWithCurrentLocation() {
+            var apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
             var units = "&units=imperial";
             var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
             var latLon = lat + lon;
@@ -155,17 +156,17 @@ $( document ).ready(function() {
             return aipUrl;
         }
 
-        function addCelsiusTemp(cityTempRounded){
+        function addCelsiusTemp(cityTempRounded) {
             $('#temp').text(convertFahrenToCelsius(cityTempRounded));
             $celsius.addClass('tempActive');
             $fahrenheit.removeClass('tempActive');
         }
 
-        function convertFahrenToCelsius(tempInFaren){
+        function convertFahrenToCelsius(tempInFaren) {
             return Math.floor((tempInFaren-32) * (5/9));
         }
 
-        function addFahrenTemp(cityTempRounded){
+        function addFahrenTemp(cityTempRounded) {
             $('#temp').text(cityTempRounded);
             $fahrenheit.addClass('tempActive');
             $celsius.removeClass('tempActive');
@@ -183,13 +184,9 @@ $( document ).ready(function() {
         function removeQuotes(str) {
             return str.replace(/\"/g, "");
         }
+    }
+});
 
-    }//end geosuccess
-
-});//end jquery
-
-
-//this was the way I was able to get location before publishing on github pages.
 // function getLocationZip(){
 //      $.ajax({
 //      url: "https://crossorigin.me/http://ip-api.com/json/",
@@ -202,16 +199,7 @@ $( document ).ready(function() {
 //  return localZip + ",us";
 // }
 
-// function createAPIKeyWithCurrentLocation(){
-//     var apiUrl = "https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?zip=";
-//     var units = "&units=imperial";
-//     var apiKey = "&APPID=98ee2d73f7eef59301620cf461192eb7";
-//     //var latLon = lat + lon;
-//     //add together key
-//     var apiUrlFull = apiUrl + getLocationZip() + units + apiKey;
 
-//     return apiUrlFull;
-// }
 
 
 
