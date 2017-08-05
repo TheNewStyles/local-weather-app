@@ -39,56 +39,43 @@
   <link rel="SHORTCUT ICON" href="images/favicon.ico" />
 
 </head>
-
-<body class="container-fluid"> 
-	
-	<div class="card">
-		<div class="weather-view col-xs-12 col-sm-6 col-sm-offset-3">
-      <div class="loader">Loading...</div>
-			<div id="location" class="col-md-12"></div>
-			<!-- weather desc -->
-			<div id="weatherDescription" class="col-xs-12"></div>
-			
-			
-			<!-- weather icons -->
-			<div class=" col-xs-12 col-lg-6" id="icons">
-			
-			</div>
-
-			<!-- temp and celsius/faren buttons -->
-			<div class="col-xs-12 col-lg-6" id="tempAndButtons">
-				<div class="col-xs-7 " id="temp"></div>
-				<div class="tempButtons col-xs-5 col-sm-4">
-					<a class='fahrenheit tempActive' id='fahrenheit'" >&deg;F</a>
-			        <span class='divider secondary'>|</span>
-			        <a class='celsius' id='celsius' >&deg;C</a>					
-				</div>				
-			</div>
-
-			
-			<hr class="col-xs-11">
-			
-			<!-- additional weather stats  -->
-			<div >
-				<div class="hum-wind col-xs-6 col-sm-4 col-sm-offset-2">
-					<img class="weather-stats-icons" src="images/icon_humidity.png" alt="humidity-icon">
-					<div id="humidity"></div>				
+	<body class="container-fluid">
+		<div class="card">
+			<div class="weather-view col-xs-12 col-sm-6 col-sm-offset-3">
+				<div class="loader">Loading...</div>
+				<div id="location" class="col-md-12"></div>
+				<!-- weather desc -->
+				<div id="weatherDescription" class="col-xs-12"></div>
+				<!-- weather icons -->
+				<div class=" col-xs-12 col-lg-6" id="icons"></div>
+				<!-- temp and celsius/faren buttons -->
+				<div class="col-xs-12 col-lg-6" id="tempAndButtons">
+					<div class="col-xs-7" id="temp"></div>
+					<div class="tempButtons col-xs-5 col-sm-4">
+						<a class='fahrenheit tempActive' id='fahrenheit'" >&deg;F</a>
+						<span class='divider secondary'>|</span>
+						<a class='celsius' id='celsius' >&deg;C</a>
+					</div>
 				</div>
 
-				<div class="hum-wind col-xs-6 col-sm-4">
-					<img class="weather-stats-icons" src="images/icon_wind.png" alt="wind-icon">
-					<div id="wind" ></div>
-				</div>				
-			</div>			
-								
-		</div>		
-	</div>
+				<hr class="col-xs-11">
 
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-  <!-- weather.js -->
-  <script src="main.js"></script>
-
-</body><!--  end body  -->
-
+				<!-- additional weather stats  -->
+				<div >
+					<div class="hum-wind col-xs-6 col-sm-4 col-sm-offset-2">
+						<img class="weather-stats-icons" src="images/icon_humidity.png" alt="humidity-icon">
+						<div id="humidity"></div>
+					</div>
+					<div class="hum-wind col-xs-6 col-sm-4">
+						<img class="weather-stats-icons" src="images/icon_wind.png" alt="wind-icon">
+						<div id="wind" ></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	  <!-- jquery -->
+	  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	  <!-- weather.js -->
+	  <script src="main.js"></script>
+	</body>
 </html>
